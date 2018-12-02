@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="carousel-item">
-        c'est nous
+        c'est moi
       <!--<img class="d-block w-100" src=".../800x400?auto=yes&bg=666&fg=444&text=Second slide" alt="Second slide"> -->
     </div>
     <div class="carousel-item">
