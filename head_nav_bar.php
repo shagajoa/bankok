@@ -8,4 +8,4 @@
 </head>
 <body>
 
-<?php include 'nav_bar.php'; ?>
+<?php include 'navbar_backoffice.php'; ?>
