@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+
+$_SESSION['user_email'] = $_POST['user_email'];
+$_SESSION['user_password'] = $_POST['user_password'];
+
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">

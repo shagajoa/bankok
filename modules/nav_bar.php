@@ -9,23 +9,21 @@
                     <a class="nav-link" href="../bankok/home.php"> <span class="sr-only">Accueil</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="comptes.php" >Comptes</a>
+                    <a class="nav-link" href="comptes.php" > Mes comptes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="operations.php">Opérations</a>
+                    <a class="nav-link" href="operations.php">Mes opérations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="beneficiaires.php">Bénéficiaires</a>
+                    <a class="nav-link disabled" href="beneficiaires.php">Mes bénéficiaires</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="moyens.php">Moyens de paiement</a>
+                    <a class="nav-link disabled" href="moyens.php">Mes moyens de paiement</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="info_perso.php">Mes informations</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Déconnexion</a>
-                </li>
+
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
