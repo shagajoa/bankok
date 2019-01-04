@@ -32,12 +32,12 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Déconnexion</a>
+                    <a class="nav-link disabled" href="login.php">Déconnexion</a>
                 </li>
             </ul>
         </div>
 </nav>
 
-<?php include 'modules/caroussel.php'; ?>
+<?php include '../modules/caroussel.php'; ?>
 
-<?php include 'modules/end.php'; ?>
+<?php include '../modules/end.php'; ?>

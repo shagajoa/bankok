@@ -10,7 +10,7 @@ body {
 
 .loginbox {
     width: 320px;
-    height: 420px;
+    height: auto;
     background-color: white;
     color: black;
     top : 35%;
@@ -82,3 +82,12 @@ h1 {
     font-size:12px;
     line-height:30px;
 }
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #ff7f87;
+    font-size:10px;
+    font-style:italic;
+  }

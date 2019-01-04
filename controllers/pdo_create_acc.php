@@ -4,6 +4,8 @@
 # INIIALISATION
 #------------------------------------------------------------
 
+session_start();
+
 // connexion a MySql avec PDO
 require_once "../controllers/pdo_connect.php";
 
@@ -39,95 +41,73 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 # VERIFICATION DES INPUT
 #------------------------------------------------------------
 
-// Validate last name
-$input_last_name = trim($_POST["user_last_name"]);
-if(empty($input_last_name)){
+if(empty($_POST["user_last_name"])) {
     $last_name_err = "Please enter your last name.";
 } else{
-    $user_last_name = $input_last_name;
+    $user_last_name = $_POST["user_last_name"];
 }
 
-// Validate first name
-$input_first_name = trim($_POST["user_first_name"]);
-if(empty($input_first_name)){
+if(empty($_POST["user_first_name"])) {
     $first_name_err = "Please enter your first name.";
 } else{
-    $user_first_name = $input_first_name;
+    $user_first_name = $_POST["user_first_name"];
 }
 
-// Validate email
-$input_email = trim($_POST["user_email"]);
-if(empty($input_email)){
-    $email_err = "Please enter an email.";     
-} elseif (filter_var($input_email, FILTER_VALIDATE_EMAIL)) {
-    $user_email = $input_email;
-} else {
-    $email_err = "Your please rewrite your email correctly";
+if(empty($_POST["user_email"])) {
+    $email_err = "Please enter your email.";
+} else{
+    $user_email = $_POST["user_email"];
 }
 
-// Validate password
-$input_password = $_POST["user_password"];
-if(empty($input_password)){
-    $password_err = "Please enter a password.";     
-} elseif (strlen($input_password) < 8) {
+if(empty($_POST["user_password"])) {
+    $password_err = "Please enter a password.";
+} elseif(strlen($_POST["user_password"]) < 8) {
     $password_err = "At least 8 characters required.";
 } else {
-    $user_password = $input_password;
+    $user_password = $_POST["user_password"];
 }
 
-// Validate phone
-$input_phone = trim($_POST["user_phone"]);
-if(empty($input_phone)){
-    $phone_err = "Please enter your phone number.";     
+if(empty($_POST["user_phone"])) {
+    $phone_err = "Please enter your phone number.";
 } else{
-    $user_phone = $input_phone;
+    $user_phone = $_POST["user_phone"];
 }
 
-// Validate date of birth
-$input_date_of_birth = $_POST["user_date_of_birth"];
-if(empty($input_date_of_birth)){
-    $date_of_birth_err = "Please enter your date of birth.";     
+if(empty($_POST["user_date_of_birth"])) {
+    $date_of_birth_err = "Please enter your date of birth.";
 } else{
-    $user_date_of_birth = $input_date_of_birth;
+    $user_date_of_birth = $_POST["user_date_of_birth"];
 }
 
-// Validate street number
-$input_number = trim($_POST["add_number"]);
-if(empty($input_number)){
-    $number_err = "Please enter your street number.";     
-} elseif(!ctype_digit($input_number)){
-    $number_err = "Please enter a positive integer.";
+if(empty($_POST["add_number"])) {
+    $number_err = "Please enter your street number.";
+} elseif(!ctype_digit($_POST["add_number"])){
+        $number_err = "Please enter a positive integer.";
 } else{
-    $add_number = $input_number;
+    $add_number = $_POST["add_number"];
 }
 
-// Validate street name
-$input_street = trim($_POST["add_street"]);
-if(empty($input_street)){
-    $street_err = "Please enter your street name.";     
+if(empty($_POST["add_street"])) {
+    $street_err = "Please enter your street name.";
 } else{
-    $add_street = $input_street;
+    $add_street = $_POST["add_street"];
 }
 
-// Validate postal code
-$input_postal_code = trim($_POST["add_postal_code"]);
-if(empty($input_postal_code)){
-    $postal_code_err = "Please enter your postal code.";     
-} elseif(strlen($input_postal_code) != 5){
-    $postal_code_err = "Valide postal code with 5 digits.";
+if(empty($_POST["add_postal_code"])) {
+    $postal_code_err = "Please enter your postal code.";
+} elseif(strlen($_POST["add_postal_code"]) != 5) {
+    $postal_code_err = "Postal code has 5 digits.";
 } else {
-    $add_postal_code = $input_postal_code;
+    $add_postal_code = $_POST["add_postal_code"];
 }
 
-// Validate city
-$input_city = trim($_POST["add_city"]);
-if(empty($input_city)){
-    $city_err = "Please enter your city";     
+if(empty($_POST["add_city"])) {
+    $city_err = "Please enter your city name.";
 } else{
-    $add_city = $input_city;
-}   
+    $add_city = $_POST["add_city"];
+}
 
-// Check input errors before inserting in database
+// verifier qu'il n'y a pas d'erreur
 if( empty($last_name_err) &&
     empty($first_name_err) &&
     empty($email_err) &&
@@ -143,9 +123,10 @@ if( empty($last_name_err) &&
 # PREPARATION DES REQUETES
 #------------------------------------------------------------
 
-    $insert_add = $bdd->prepare('INSERT INTO addresses(add_number, add_street, add_postal_code, add_city) VALUES(:add_number, :add_street, :add_postal_code, :add_city)');
-    $select_ag = $bdd->prepare('SELECT DISTINCT agency_id FROM agencies INNER JOIN addresses WHERE LEFT(addresses.ADD_POSTAL_CODE,2) = LEFT(?,2)');
-    $insert_user = $bdd->prepare('INSERT INTO users (user_last_name, user_first_name, user_email, user_password, user_phone, user_date_of_birth, user_active, id_agency, id_adress) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $insert_add = $bdd->prepare('INSERT INTO adresses(add_number, add_street, add_postal_code, add_city) VALUES(:add_number, :add_street, :add_postal_code, :add_city)');
+    $select_ag = $bdd->prepare('SELECT DISTINCT agency_id FROM agencies INNER JOIN adresses WHERE LEFT(adresses.ADD_POSTAL_CODE,2) = LEFT(?,2)');
+    $insert_user = $bdd->prepare('INSERT INTO users (user_last_name, user_first_name, user_email, user_password, user_phone, user_date_of_birth, user_active, agency_id, adress_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $select_user = $bdd->prepare('SELECT * FROM users WHERE user_id = ?');
 
 #------------------------------------------------------------
 # EXECUTION
@@ -156,31 +137,62 @@ if( empty($last_name_err) &&
         ':add_number' => $add_number,
         ':add_street' => $add_street,
         ':add_postal_code' => $add_postal_code,
-        ':add_city' => $add_city)) or die(print_r($insert_add->errorInfo()));
+        ':add_city' => $add_city));
 
     // recuperer l'id de cette nouvelle adresse
     $new_add_id_string = $bdd->lastInsertId();
+    
     // convertir l'id en integer
     $new_add_id = intval($new_add_id_string);
 
     // requete pour trouver l'agence associee a l'ustilisateur grace au 2 premiers chiffres du code postal
-    $select_ag->execute(array($input_postal_code)) or die(print_r($select_ag->errorInfo()));
+    $select_ag->execute(array($add_postal_code));
+    
     // chercher l'id de cette agence
     $found_agency = $select_ag->fetch();
     $select_ag_id = $found_agency['agency_id'];
     
     // creer un nouvel utilisateur
-    $insert_user->execute(array($input_last_name,$input_first_name,$input_email,$input_password,$input_phone,$input_date_of_birth,true,$select_ag_id,$new_add_id)) or die(print_r($insert_user->errorInfo()));
+    $insert_user->execute(array($user_last_name,$user_first_name,$user_email,password_hash($user_password, PASSWORD_DEFAULT),$user_phone,$user_date_of_birth,true,$select_ag_id,$new_add_id));
+
+#------------------------------------------------------------
+# AFFECTATION VALEUR DE SESSION
+#------------------------------------------------------------
     
+    session_regenerate_id();
+    
+    $new_user_id_string = $bdd->lastInsertId();
+    $new_user_id = intval($new_user_id_string);
+
+    $select_user->execute(array($new_user_id));
+    $found_user = $select_user->fetch();
+
+    $_SESSION["authorized"] = true;
+    $_SESSION["user_last_name"] = $found_user["user_last_name"];
+    $_SESSION["user_first_name"] = $found_user["user_first_name"];
+    $_SESSION["user_email"] = $found_user["user_email"];
+    $_SESSION["user_password"] = $found_user["user_password"];
+    $_SESSION["user_phone"] = $found_user["user_phone"];
+    $_SESSION["user_date_of_birth"] = $found_user["user_date_of_birth"];
+
+    session_write_close();
+
 #------------------------------------------------------------
 # FERMETURE DES REQUETES
 #------------------------------------------------------------
 
-    //Fermer les requetes
     $insert_add->closeCursor();
     $select_ag->closeCursor();
     $insert_user->closeCursor();
 
-    }
+#------------------------------------------------------------
+# REDIRECTION
+#------------------------------------------------------------
+    
+    header("location:../pages/home.php");
+    exit();
+
+}
+
 }
 ?>
