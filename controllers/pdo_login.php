@@ -57,8 +57,13 @@ if(empty($_POST["user_password"])) {
             session_regenerate_id();
 
             $_SESSION["authorized"] = true;
+            $_SESSION["user_id"] = $user["user_id"];
+            $_SESSION["user_last_name"] = $user["user_last_name"];
+            $_SESSION["user_first_name"] = $user["user_first_name"];
             $_SESSION["user_email"] = $user["user_email"];
             $_SESSION["user_password"] = $user["user_password"];
+            $_SESSION["user_phone"] = $user["user_phone"];
+            $_SESSION["user_date_of_birth"] = $user["user_date_of_birth"];
 
             //fermeture de ssions pour libérer les données pour d'autres scripts
             session_write_close();

@@ -20,7 +20,7 @@
             <input type="password" name="user_password" />
             <span class="help-block"><?php echo $password_err;?></span>
             <input type="submit" name="login_button" value="Login" />
-            <a href="create_account.php"> Don't have an account ? </a>
+            <a href="create_user.php"> Don't have an account ? </a>
         </form>
     </div>
 
