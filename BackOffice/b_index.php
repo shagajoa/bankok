@@ -1,4 +1,4 @@
-<?php include 'head_nav_bar.php'; ?>
+<?php include 'b_head_nav_bar.php'; ?>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -33,4 +33,4 @@
   </a>
 </div>
 
-<?php include 'end.php'; ?>  
+<?php include 'b_end.php'; ?>  
