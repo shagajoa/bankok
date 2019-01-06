@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once "../controllers/pdo_connect.php";
 include '../modules/head.php';
 include '../modules/b_nav_bar.php';
 

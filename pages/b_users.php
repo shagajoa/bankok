@@ -43,11 +43,11 @@ include '../modules/b_nav_bar.php';
                                     echo "<td>" . $row['user_date_of_birth'] . "</td>";
                                     echo "<td>";
                                         echo "  <div class='btn-group'>
-                                                <a href=#> <button type='button' class='btn btn-primary'>Modifier </button>
+                                                <a href=b_modify_user.php> <button type='button' class='btn btn-primary'>Modifier </button>
                                                 </div>
                                                 ";
                                         echo "  <div class='btn-group'>
-                                        <a href=#> <button type='button' class='btn btn-primary'>Supprimer </button>
+                                        <a href=b_delete_user.php> <button type='button' class='btn btn-primary'>Supprimer </button>
                                         </div>
                                         ";
                                     echo "</td>";
