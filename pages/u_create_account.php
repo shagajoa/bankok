@@ -1,8 +1,8 @@
 <?php
 
-require_once '../controllers/pdo_create_acc.php';
+require_once '../controllers/pdo_u_create_acc.php';
 include '../modules/head.php';
-include '../modules/nav_bar.php';
+include '../modules/u_nav_bar.php';
 
 ?>
 

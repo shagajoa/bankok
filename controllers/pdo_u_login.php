@@ -69,7 +69,7 @@ if(empty($_POST["user_password"])) {
             session_write_close();
 
             //redirection
-            header("location:../pages/home.php");
+            header("location:../pages/u_home.php");
             exit();
 
         }

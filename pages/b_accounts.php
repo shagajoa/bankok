@@ -1,20 +1,18 @@
 <?php
 
 session_start();
-require_once "../controllers/pdo_connect.php";
 include '../modules/head.php';
-include '../modules/nav_bar.php';
+include '../modules/b_nav_bar.php';
 
 ?>
-
 
 <div class="wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header clearfix">
-                    <h2 class="pull-left">Detail de mes comptes</h2>
-                    <a href="create_account.php" class="btn btn-success">Créer un nouveau compte</a>
+                    <h2 class="pull-left">Detail des comptes</h2>
+                    <a href="b_create_account.php" class="btn btn-success">Créer un nouveau compte</a>
                 </div>
 
                 <?php
@@ -46,12 +44,11 @@ include '../modules/nav_bar.php';
                                     echo "<td>" . $row['account_overdraft'] . "</td>";
                                     echo "<td>";
                                         echo "  <div class='btn-group'>
-                                                <a href='modify_account.php'> <button type='button' class='btn btn-primary'>Modifier </button>
-                                                <a href=#> <button type='button' class='btn btn-primary'>Supprimer </button>
+                                        <a href=b_modify_account.php> <button type='button' class='btn btn-primary'>Modifier </button>
+                                        </div>";
+                                        echo "  <div class='btn-group'>
+                                                <a href=b_delete_account.php> <button type='button' class='btn btn-primary'>Supprimer </button>
                                                 </div>";
-                                        
-                                        //"<a href='modify_account.php?id=". $row['account_id'] ."' title='Modifier' data-toggle='tooltip'><span class='btn btn-primary'>Update</span></a>";
-                                        //echo "<a href='delete_account.php?id=". $row['account_id'] ."' title='Suprimer' data-toggle='tooltip'><span class='btn btn-primary'>Delete</span></a>";
                                     echo "</td>";
                                 echo "</tr>";
                             }
@@ -59,7 +56,7 @@ include '../modules/nav_bar.php';
                         echo "</table>";
 
                     } else{
-                        echo "<p class='lead'><em>Vous n'avez pas encore de compte bancaire. Veuillez en créer un. </em></p>";
+                        echo "<p class='lead'><em>Cet utilisateur ne possède pas de compte bancaire.</em></p>";
                     }
 
                 // Close connection

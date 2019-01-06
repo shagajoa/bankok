@@ -99,6 +99,7 @@ if(empty($_POST["add_postal_code"])) {
     $postal_code_err = "Postal code has 5 digits.";
 } else {
     $add_postal_code = $_POST["add_postal_code"];
+
 }
 
 if(empty($_POST["add_city"])) {
@@ -124,8 +125,8 @@ if( empty($last_name_err) &&
 #------------------------------------------------------------
 
     $insert_add = $bdd->prepare('INSERT INTO adresses(add_number, add_street, add_postal_code, add_city) VALUES(:add_number, :add_street, :add_postal_code, :add_city)');
-    $select_ag = $bdd->prepare('SELECT DISTINCT agency_id FROM agencies INNER JOIN adresses WHERE LEFT(adresses.ADD_POSTAL_CODE,2) = LEFT(?,2)');
-    $insert_user = $bdd->prepare('INSERT INTO users (user_last_name, user_first_name, user_email, user_password, user_phone, user_date_of_birth, user_active, agency_id, adress_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $select_ag = $bdd->prepare('SELECT DISTINCT agency_id FROM agencies INNER JOIN adresses WHERE (agencies.add_id = adresses.add_id) and (LEFT(adresses.add_postal_code,2) = ?)');
+    $insert_user = $bdd->prepare('INSERT INTO users (user_last_name, user_first_name, user_email, user_password, user_phone, user_date_of_birth, user_active, agency_id, add_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $select_user = $bdd->prepare('SELECT * FROM users WHERE user_id = ?');
 
 #------------------------------------------------------------
@@ -145,13 +146,16 @@ if( empty($last_name_err) &&
     // convertir l'id en integer
     $new_add_id = intval($new_add_id_string);
 
-    // requete pour trouver l'agence associee a l'ustilisateur grace au 2 premiers chiffres du code postal
-    $select_ag->execute(array($add_postal_code));
+    // requete pour trouver l'agence associee a l'utilisateur grace au 2 premiers chiffres du code postal
+    $add_postal_code_2 = substr($_POST["add_postal_code"],0,2);
+    $select_ag->execute(array($add_postal_code_2));
+    
     
     // chercher l'id de cette agence
     $found_agency = $select_ag->fetch();
-    $select_ag_id = $found_agency['agency_id'];
     
+    $select_ag_id = $found_agency['agency_id'];
+
     // creer un nouvel utilisateur
     $insert_user->execute(array($user_last_name,$user_first_name,$user_email,password_hash($user_password, PASSWORD_DEFAULT),$user_phone,$user_date_of_birth,true,$select_ag_id,$new_add_id));
 
@@ -190,7 +194,7 @@ if( empty($last_name_err) &&
 # REDIRECTION
 #------------------------------------------------------------
     
-    header("location:../pages/home.php");
+    header("location:../pages/u_home.php");
     exit();
 
 }

@@ -1,27 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="home.php">BankOK</a>
+        <a class="navbar-brand" href="b_home.php">BankOK</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="home.php"> <span class="sr-only">Accueil</span></a>
+                    <a class="nav-link" href="b_home.php"> <span class="sr-only">Accueil</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="my_accounts.php" > Mes comptes</a>
+                    <a class="nav-link" href="b_users.php" >Utilisateurs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="operations.php">Mes opérations</a>
+                    <a class="nav-link" href="b_accounts.php">Comptes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="beneficiaires.php">Mes bénéficiaires</a>
+                    <a class="nav-link disabled" href="#">Opérations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="moyens.php">Mes moyens de paiement</a>
+                    <a class="nav-link disabled" href="#">Moyens de paiement</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="info_perso.php">Mes informations</a>
+                    <a class="nav-link disabled" href="#">Agence</a>
                 </li>
 
             </ul>

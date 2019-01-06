@@ -16,7 +16,7 @@ session_start();
 
 <?php 
 
-include '../modules/nav_bar.php';
+include '../modules/u_nav_bar.php';
 
 include '../modules/caroussel.php';
 
