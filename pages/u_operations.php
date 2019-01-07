@@ -16,8 +16,8 @@ include '../modules/u_nav_bar.php';
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header clearfix">
-                    <h2 class="pull-left">Detail de mes comptes</h2>
-                    <a href="u_create_ope.php" class="btn btn-success">Créer un nouveau compte</a>
+                    <h2 class="pull-left">Mes opérations</h2>
+                    <a href="u_create_ope.php" class="btn btn-success">Nouveau virement</a>
                 </div>
 
                 <?php

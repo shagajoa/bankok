@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="home.php">BankOK</a>
+        <a class="navbar-brand" href="u_home.php">BankOK</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,13 +21,13 @@
                     <a class="nav-link disabled" href="#">Mes moyens de paiement</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Mes informations</a>
+                    <a class="nav-link disabled" href="u_user_info.php">Mes informations</a>
                 </li>
 
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Déconnexion</a>
+                    <a class="nav-link disabled" href="../controllers/pdo_logout.php">Déconnexion</a>
                 </li>
             </ul>
         </div>

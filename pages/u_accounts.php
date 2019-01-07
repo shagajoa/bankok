@@ -17,7 +17,7 @@ include '../modules/u_nav_bar.php';
             <div class="col-md-12">
                 <div class="page-header clearfix">
                     <h2 class="pull-left">Detail de mes comptes</h2>
-                    <a href="u_create_account.php" class="btn btn-success">Créer un nouveau compte</a>
+                    <a href="u_create_account.php" class="btn btn-success">Nouveau compte</a>
                 </div>
 
                 <?php
@@ -37,6 +37,7 @@ include '../modules/u_nav_bar.php';
                                     echo "<th>RIB</th>";
                                     echo "<th>Solde</th>";
                                     echo "<th>Découvert autorisé</th>";
+                                    echo "<th>Status</th>";
                                 echo "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
@@ -47,10 +48,13 @@ include '../modules/u_nav_bar.php';
                                     echo "<td>" . $row['account_rib'] . "</td>";
                                     echo "<td>" . $row['account_balance'] . "</td>";
                                     echo "<td>" . $row['account_overdraft'] . "</td>";
+                                    echo "<td>" . $row['account_status'] . "</td>";
                                     echo "<td>";
+                                    if ($row['account_status'] == 'valide') {
                                         echo "<div class='btn-group'>";
                                         $row_account_id = $row['account_id'];
                                         echo "<a href='../controllers/pdo_u_delete_acc.php?acc_id=".$row_account_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
+                                    }
                                     echo "</td>";
                                 echo "</tr>";
                             }

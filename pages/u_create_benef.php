@@ -1,23 +1,41 @@
 <?php
 
+session_start();
+
 if(isset($_SESSION["user_id"])) {
-    
-require_once '../controllers/pdo_b_create_benef.php';
+
+require_once '../controllers/pdo_u_create_benef.php';
 include '../modules/head.php';
 include '../modules/b_nav_bar.php';
 
 ?>
 
-<h2> Faire une demande de nouveau beneficiaire </h2>
+<div class="container" style = "padding-top: 68px;">
+    <h2> Faire une demande de nouveau beneficiaire </h2>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <p> RIB de votre compte</p> <input type="text" name="account_rib_1">
-        <span class="help-block"><?php echo $account_rib_1_err;?></span>
-        <p> RIB du compte bénéficiaire</p> <input type="text" name="account_rib_2">
-        <span class="help-block"><?php echo $account_rib_1_err;?></span>
-        <input type="submit" value="Submit">
-    </form>
 
-<?php include '../modules/end.php';
+        <div class="form-group row">
+            <label for="account_name" class="col-sm-3 col-form-label">RIB de votre compte</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="account_rib_1">
+                <small class="form-text text-muted"><?php echo $account_rib_1_err;?></small>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="amount" class="col-sm-3 col-form-label">RIB du compte bénéficiaire</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="account_rib_2">
+                <small class="form-text text-muted"><?php echo $account_rib_2_err;?></small>
+            </div>
+            
+        </div>
+            <input type="submit" value="Valider" class='btn btn-primary'>
+            <input type="button" value="Annuler" class='btn btn-primary' onClick="document.location.href='../pages/u_benef.php'" />
+    </form>
+</div>
+
+<?php include '../modules/end.php'; 
 } else {
     header('location:../pages/u_login.php');
 }

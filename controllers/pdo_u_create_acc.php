@@ -1,5 +1,4 @@
 <?php 
-session_start();
 require_once "../controllers/pdo_connect.php";
 require "../controllers/functions.php";
 
