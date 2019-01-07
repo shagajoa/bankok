@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+
+if(isset($_SESSION["user_id"])) {
+
 require_once "../controllers/pdo_connect.php";
 include '../modules/head.php';
 include '../modules/u_nav_bar.php';
@@ -71,4 +74,8 @@ include '../modules/u_nav_bar.php';
     </div>
 </div>
 
-<?php include '../modules/end.php'; ?>  
+<?php include '../modules/end.php';
+
+} else {
+    header('location:../pages/u_login.php');
+}  

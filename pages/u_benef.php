@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+
+if(isset($_SESSION["user_id"])) {
+
 require_once "../controllers/pdo_connect.php";
 include '../modules/head.php';
 include '../modules/u_nav_bar.php';
@@ -14,7 +17,7 @@ include '../modules/u_nav_bar.php';
             <div class="col-md-12">
                 <div class="page-header clearfix">
                     <h2 class="pull-left">Mes bénéficiaires</h2>
-                    <a href="u_create_account.php" class="btn btn-success">Nouveau bénéficiaire</a>
+                    <a href="u_create_benef.php" class="btn btn-success">Nouveau bénéficiaire</a>
                 </div>
 
                 <?php
@@ -76,4 +79,7 @@ include '../modules/u_nav_bar.php';
 </div>
 
 
-<?php include '../modules/end.php'; ?>  
+<?php include '../modules/end.php';
+} else {
+    header('location:../pages/u_login.php');
+}   

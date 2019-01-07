@@ -2,6 +2,8 @@
 
 session_start();
 
+if(isset($_SESSION["user_id"])) {
+
 ?>
 
 <html lang="en">
@@ -20,6 +22,8 @@ include '../modules/u_nav_bar.php';
 
 include '../modules/caroussel.php';
 
-include '../modules/end.php'; 
+include '../modules/end.php';
 
-?>
+} else {
+    header('location:../pages/u_login.php');
+}

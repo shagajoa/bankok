@@ -1,4 +1,6 @@
-<?php require_once '../controllers/pdo_u_create_user.php'; ?>
+<?php 
+
+require_once '../controllers/pdo_u_create_user.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">

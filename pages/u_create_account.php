@@ -1,5 +1,7 @@
 <?php
 
+if(isset($_SESSION["user_id"])) {
+
 require_once '../controllers/pdo_u_create_acc.php';
 include '../modules/head.php';
 include '../modules/u_nav_bar.php';
@@ -15,4 +17,7 @@ include '../modules/u_nav_bar.php';
         <input type="submit" value="Submit">
     </form>
 
-<?php include '../modules/end.php'; ?>  
+<?php include '../modules/end.php'; 
+} else {
+    header('location:../pages/u_login.php');
+}
