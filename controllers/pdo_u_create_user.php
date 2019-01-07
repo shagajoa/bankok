@@ -53,7 +53,15 @@ if(empty($_POST["user_first_name"])) {
     $user_first_name = $_POST["user_first_name"];
 }
 
-if(empty($_POST["user_email"])) {
+// l'email ne peut pas être déjà existant dans la bdd
+// et doit avoir une nomenclature d'email "x@xxx.xx"
+$select_email = $bdd->prepare('SELECT * FROM users WHERE user_email = ?');
+$select_email->execute(array($_POST["user_email"]));
+$count = $select_email->rowCount();
+                
+if($count > 0){
+    $email_err = "This email already exists.";
+} elseif(empty($_POST["user_email"])){
     $email_err = "Please enter your email.";
 } else{
     $user_email = $_POST["user_email"];

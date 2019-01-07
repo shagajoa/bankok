@@ -15,7 +15,7 @@
                     <a class="nav-link" href="u_operations.php">Mes opérations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Mes bénéficiaires</a>
+                    <a class="nav-link disabled" href="u_benef.php">Mes bénéficiaires</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Mes moyens de paiement</a>

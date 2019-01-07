@@ -61,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $insert_acc->closeCursor();
 
         //redirection
-        header("location:../pages/u_home.php");
+        header("location:../pages/u_accounts.php");
         exit();
     }
 
