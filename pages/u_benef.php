@@ -24,7 +24,7 @@ include '../modules/u_nav_bar.php';
 
                 if (isset($_SESSION["user_id"])) {
 
-                    $my_benef = $bdd->prepare('SELECT b.benef_id, u.user_last_name, u.user_first_name, a.account_rib, b.benef_status
+                    $my_benef = $bdd->prepare('SELECT b.benef_id, u.user_last_name, u.user_first_name, a.account_name, a.account_rib, b.benef_status
                     FROM users u
                     INNER JOIN accounts a ON a.account_user_id = u.user_id
                     INNER JOIN beneficiaries b ON b.account_id_2 = a.account_id
@@ -42,6 +42,7 @@ include '../modules/u_nav_bar.php';
                                 echo "<tr>";
                                     echo "<th>Nom</th>";
                                     echo "<th>Prénom</th>";
+                                    echo "<th>Nom du compte</th>";
                                     echo "<th>RIB</th>";
                                     echo "<th>Status</th>";
                                 echo "</tr>";
@@ -51,6 +52,7 @@ include '../modules/u_nav_bar.php';
                                 echo "<tr>";
                                     echo "<td>" . $row['user_last_name'] . "</td>";
                                     echo "<td>" . $row['user_first_name'] . "</td>";
+                                    echo "<td>" . $row['account_name'] . "</td>";
                                     echo "<td>" . $row['account_rib'] . "</td>";
                                     echo "<td>" . $row['benef_status'] . "</td>";
                                     echo "<td>";

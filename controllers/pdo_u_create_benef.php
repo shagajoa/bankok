@@ -31,17 +31,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
 
         //requête pour le RIB du compte du beneficiaire
-        $select_rib_2 = $bdd->prepare('SELECT * FROM accounts WHERE account_user_id != ? AND account_rib = ?');
-        $select_rib_2->execute(array($_SESSION["user_id"],$_POST["account_rib_2"]));
-        $found_acc_2 = $select_rib_2->fetch();
-        $count_2 = $select_rib_2->rowCount();
+        //$select_rib_2 = $bdd->prepare('SELECT * FROM accounts WHERE account_user_id != ? AND account_rib = ?');
+        //$select_rib_2->execute(array($_SESSION["user_id"],$_POST["account_rib_2"]));
+        $select_rib_1->execute(array($_SESSION["user_id"],$_POST["account_rib_2"]));
+        $found_acc_2 = $select_rib_1->fetch();
+        $count_2 = $select_rib_1->rowCount();
 
         if(empty($_POST["account_rib_2"])) {
             $account_rib_2_err = "Veuillez entrer un RIB.";
         } elseif ($count_2 == 1) {
             $account_id_2 = $found_acc_2["account_id"];
-        } elseif($count_2 == 0) {
-            $account_rib_2_err = "Vous ne pouvez pas déclarer ce bénéficiaire.";
+        //} elseif($count_2 == 0) {
+            //$account_rib_2_err = "Vous ne pouvez pas déclarer ce bénéficiaire.";
         }
 
         //vérifier que la combinaison des deux comptes n'existent pas déjà

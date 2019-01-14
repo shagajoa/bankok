@@ -17,14 +17,14 @@ include '../modules/u_nav_bar.php';
             <div class="col-md-12">
                 <div class="page-header clearfix">
                     <h2 class="pull-left">Mes opérations</h2>
-                    <a href="u_create_ope.php" class="btn btn-success">Nouveau virement</a>
+                    <a href="u_create_ope_1.php" class="btn btn-success">Nouveau virement</a>
                 </div>
 
                 <?php
 
-                if (isset($_SESSION["user_id"])) {
-
-                $accounts = $bdd->prepare('SELECT * FROM operations WHERE ope_acc_id_1 = ?');
+                $accounts = $bdd->prepare("SELECT DISTINCT ope_id, ope_method, ope_amount, ope_date, ope_acc_id_1, ope_acc_id_2 FROM operations o
+                INNER JOIN accounts a ON a.account_id = o.ope_acc_id_1 OR a.account_id = o.ope_acc_id_2
+                WHERE a.account_user_id = ?");
                 $accounts->execute(array($_SESSION["user_id"]));
                 $count = $accounts->rowCount();
                 
@@ -34,9 +34,9 @@ include '../modules/u_nav_bar.php';
                                 echo "<tr>";
                                     echo "<th>Clé</th>";
                                     echo "<th>Méthode</th>";
-                                    echo "<th>Montant</th>";
-                                    echo "<th>Date</th>";
                                     echo "<th>Bénéficiaire</th>";
+                                    echo "<th>Date</th>";
+                                    echo "<th>Montant</th>";
                                 echo "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
@@ -44,26 +44,23 @@ include '../modules/u_nav_bar.php';
                                 echo "<tr>";
                                     echo "<td>" . $row['ope_id'] . "</td>";
                                     echo "<td>" . $row['ope_method'] . "</td>";
-                                    echo "<td>" . $row['ope_amount'] . "</td>";
+                                    include "../controllers/pdo_u_ope_benef.php";
                                     echo "<td>" . $row['ope_date'] . "</td>";
-                                    echo "<td>" . $row['ope_acc_id_2'] . "</td>";
-
+                                    include "../controllers/pdo_u_ope_amount.php";
+                                    
                                 echo "</tr>";
                             }
                             echo "</tbody>";                            
                         echo "</table>";
 
                     } else{
-                        echo "<p class='lead'><em>Vous n'avez pas fait d'opérations. </em></p>";
+                        echo "<p class='lead'><em>Vous n'avez pas d'opérations. </em></p>";
                     }
 
                 // Close connection
                 $accounts->closeCursor();
 
-                } else {
-
-                    echo "Your session has expired, please login again.";
-                }
+                
                 ?>
             </div>
         </div>        

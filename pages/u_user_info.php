@@ -144,7 +144,7 @@ include '../modules/u_nav_bar.php';
         </div>
     </div>
 
-<?php include '../modules/end.php'; 
+<?php include '../modules/end.php';  
 } else {
     header('location:../pages/u_login.php');
 }

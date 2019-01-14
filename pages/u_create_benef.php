@@ -6,7 +6,7 @@ if(isset($_SESSION["user_id"])) {
 
 require_once '../controllers/pdo_u_create_benef.php';
 include '../modules/head.php';
-include '../modules/b_nav_bar.php';
+include '../modules/u_nav_bar.php';
 
 ?>
 

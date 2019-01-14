@@ -32,6 +32,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     //verifier s'il y a des erreurs de saisie
     if(empty($account_name_err) && empty($account_balance_err)) {
 
+        # --------------------
+        # Insertion de compte
+        # --------------------
+
         //RIB cree par une fonction piocher des caractères au hasard pour former un varchar de 23 caractères
         $account_rib = RIB();
         
