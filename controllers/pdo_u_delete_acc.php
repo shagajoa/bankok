@@ -15,7 +15,7 @@ $found_acc = $select_acc->fetch();
 if ($found_acc['account_balance'] == 0) {
     $delete_acc = $bdd->prepare("DELETE FROM accounts WHERE account_id = ?");
     $delete_acc->execute(array($id));
-    echo '<script type="text/javascript">alert("Vitre compte a bien été supprimé.");window.history.go(-1);</script>';
+    echo '<script type="text/javascript">alert("Votre compte a bien été supprimé.");window.history.go(-1);</script>';
 } elseif($found_acc['account_balance'] < 0) {
    
     echo '<script type="text/javascript">alert("Votre compte est à découvert. Veuillez rembourser ce crédit avant de supprimer votre compte.");window.history.go(-1);</script>';

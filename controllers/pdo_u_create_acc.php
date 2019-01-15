@@ -4,12 +4,14 @@ require "../controllers/functions.php";
 
 // creation des variables
 $account_name = '';
+$account_type = '';
 $account_rib = '';
 $account_balance = '';
 $account_overdraft = '';
 $user_id = '';
 $account_status = '';
 $account_name_err = '';
+$account_type_err = '';
 $account_balance_err = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -17,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // gestion des erreurs
     if(empty($_POST["account_name"])) {
         $account_name_err = "Veuillez entrer un nom de compte.";
-    } else{
+    } else {
         $account_name = $_POST["account_name"];
     }
     
@@ -29,8 +31,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $account_balance = $_POST["account_balance"];
     }
 
+    if($_POST["account_type"] == '0') {
+        $account_type_err = "Veuillez sélectionner un type de compte";
+    } else {
+        $account_type = $_POST["account_type"];
+    }
+    
+
     //verifier s'il y a des erreurs de saisie
-    if(empty($account_name_err) && empty($account_balance_err)) {
+    if(empty($account_name_err) && empty($account_balance_err) && empty($account_type_err)) {
 
         # --------------------
         # Insertion de compte
@@ -44,16 +53,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         //User_id est la personne qui est connectée
         $user_id=$_SESSION["user_id"];
-        var_dump($user_id);
 
         //Status en attente avant validation ou non par le backoffice
         $account_status = 'pending';
 
         //Requete d'insertion
-        $insert_acc = $bdd->prepare('INSERT INTO accounts(account_name, account_rib, account_balance, account_overdraft, account_user_id, account_status) 
-        VALUES (:acc_name, :acc_rib, :acc_balance, :acc_overdraft, :acc_user_id, :acc_status)');
+        $insert_acc = $bdd->prepare('INSERT INTO accounts(account_name, account_type, account_rib, account_balance, account_overdraft, account_user_id, account_status) 
+        VALUES (:acc_name, :acc_type, :acc_rib, :acc_balance, :acc_overdraft, :acc_user_id, :acc_status)');
         $insert_acc->execute(array(
             ':acc_name' => $account_name,
+            ':acc_type' => $account_type,
             ':acc_rib' => $account_rib,
             ':acc_balance' => $account_balance,
             ':acc_overdraft' => $account_overdraft,

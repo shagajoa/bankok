@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (empty($amount_err)) {
 
         //nouvelle operation
-        $new_ope = $bdd->prepare("INSERT INTO operations (ope_method, ope_amount, ope_way, ope_date, ope_acc_id_1, ope_acc_id_2) VALUES ('transfer', ?,'debit',CURRENT_DATE,?, ?)");
+        $new_ope = $bdd->prepare("INSERT INTO operations (ope_method, ope_amount, ope_date, ope_acc_id_1, ope_acc_id_2) VALUES ('transfer', ?, CURRENT_DATE,?, ?)");
         $new_ope->execute(array($_POST["ope_amount"], $_SESSION["my_account"], $_SESSION['my_benef']));
 
         //débit de l'émetteur
@@ -34,7 +34,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $credit->closeCursor();
 
         //redirection
-
         header("location:../pages/u_operations.php");
         exit();
 

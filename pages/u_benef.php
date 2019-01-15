@@ -24,7 +24,7 @@ include '../modules/u_nav_bar.php';
 
                 if (isset($_SESSION["user_id"])) {
 
-                    $my_benef = $bdd->prepare('SELECT b.benef_id, u.user_last_name, u.user_first_name, a.account_name, a.account_rib, b.benef_status
+                    $my_benef = $bdd->prepare('SELECT b.benef_id, u.user_last_name, u.user_first_name, a.account_name, a.account_type, a.account_rib, b.benef_status
                     FROM users u
                     INNER JOIN accounts a ON a.account_user_id = u.user_id
                     INNER JOIN beneficiaries b ON b.account_id_2 = a.account_id
@@ -40,26 +40,26 @@ include '../modules/u_nav_bar.php';
                         echo "<table class='table table-bordered table-striped'>";
                             echo "<thead>";
                                 echo "<tr>";
-                                    echo "<th>Nom</th>";
-                                    echo "<th>Prénom</th>";
-                                    echo "<th>Nom du compte</th>";
-                                    echo "<th>RIB</th>";
+                                    echo "<th>Bénéficiaire</th>";
+                                    echo "<th>Compte bénéficiaire</th>";
+                                    echo "<th>Type du compte</th>";
+                                    echo "<th>RIB bénéficiaire</th>";
                                     echo "<th>Status</th>";
                                 echo "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
                             while($row = $my_benef->fetch()){
                                 echo "<tr>";
-                                    echo "<td>" . $row['user_last_name'] . "</td>";
-                                    echo "<td>" . $row['user_first_name'] . "</td>";
+                                    echo "<td>" . $row['user_last_name'] . " " . $row['user_first_name'] . "</td>";
                                     echo "<td>" . $row['account_name'] . "</td>";
+                                    echo "<td>" . $row['account_type'] . "</td>";
                                     echo "<td>" . $row['account_rib'] . "</td>";
                                     echo "<td>" . $row['benef_status'] . "</td>";
                                     echo "<td>";
-                                        echo "<div class='btn-group'>";
                                         if ($row['benef_status'] == 'valide') {
-                                        $row_account_id = $row['benef_id'];
-                                        echo "<a href='../controllers/pdo_u_delete_acc.php?acc_id=".$row_account_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
+                                        echo "<div class='btn-group'>";
+                                        $row_benef_id = $row['benef_id'];
+                                        echo "<a href='../controllers/pdo_u_delete_benef.php?benef_id=".$row_benef_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
                                         }
                                     echo "</td>";
                                 echo "</tr>";
@@ -67,7 +67,7 @@ include '../modules/u_nav_bar.php';
                             echo "</tbody>";                            
                         echo "</table>";
 
-                    } else{
+                    } else {
                         echo "<p class='lead'><em>Vous n'avez pas encore de compte bancaire. Veuillez en créer un. </em></p>";
                     }
 

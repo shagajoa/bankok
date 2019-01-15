@@ -21,6 +21,18 @@ include '../modules/u_nav_bar.php';
                 <small class="form-text text-muted"><?php echo $account_name_err;?></small>
             </div>
         </div>
+
+        <div class="form-group row">
+            <label for="account_name" class="col-sm-3 col-form-label">Type de compte</label>
+            <div class="col-sm-5">
+            <select name='account_type' class="form-control">
+                <option value = '0'> -- Aucune sélection -- </option>
+                <option value='Courant'> Compte courant </option>
+                <option value='Epargne'> Compte épargne </option>
+            </select>
+                <small class="form-text text-muted"><?php echo $account_type_err;?></small>
+            </div>
+        </div>
         
         <div class="form-group row">
             <label for="amount" class="col-sm-3 col-form-label">Solde intial</label>
