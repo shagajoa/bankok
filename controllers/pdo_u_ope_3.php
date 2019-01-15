@@ -4,7 +4,6 @@ require_once "../controllers/pdo_connect.php";
 $amount_err = '';
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    
     //conversion de l'input string en entier
     $amount = intval($_POST["ope_amount"]);
 
