@@ -51,14 +51,32 @@ if (isset($_POST['selected_user'])) {
                                     echo "<td>" . $row['payment_date_order'] . "</td>";
                                     echo "<td>" . $row['payment_status'] . "</td>";
                                     echo "<td>";
+                                    echo "<div class='btn-group'>";
+                                    if ($row['payment_status'] == 'valide') {
                                         echo "<div class='btn-group'>";
                                         $row_payment_id = $row['payment_id'];
-                                        echo "<a href='../controllers/pdo_b_delete_acc.php?acc_id=".$row_payment_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
+                                        echo "<a href='../controllers/pdo_b_delete_payment.php?acc_id=".$row_payment_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
+                                    }
+                                    else if ($row['payment_status'] == 'pending') {
+                                        echo "<div class='btn-group'>";
+                                        $row_payment_id = $row['payment_id'];
+                                        echo "<a href='../controllers/pdo_b_validate_payment.php?acc_id=".$row_payment_id."'><button type='button' class='btn btn-primary'>Valider </button></a></div>";
+                                        echo "<a href='../controllers/pdo_b_reject_payment.php?acc_id=".$row_payment_id."'><button type='button' class='btn btn-primary'>Refuser </button></a></div>";
+                                        
+
+                                    }
+                                    else if ($row['payment_status'] == 'rejected') {
+                                        echo "<p class='lead'><em>Cette demande de compte a été rejetée </em></p>";
+                                        
+                                    }
                                     echo "</td>";
                                 echo "</tr>";
                             }
                             echo "</tbody>";                            
                         echo "</table>";
+
+
+    
 
                     } else{
                         echo "<p class='lead'><em>Vous n'avez aucune carte bleue ni chèque à valider </em></p>";

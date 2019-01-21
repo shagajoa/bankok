@@ -59,17 +59,31 @@ include '../modules/b_select_user.php';
                                 echo "<td>" . $row['account_status'] . "</td>";
                                 echo "<td>";
                                         echo "<div class='btn-group'>";
-                                        $row_account_id = $row['account_id'];
-                                        echo "<a href='../controllers/pdo_b_delete_acc.php?acc_id=".$row_account_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
-                                    echo "</td>";
-                                echo "</tr>";
-                            }
-                            echo "</tbody>";                            
-                        echo "</table>";
+                                        if ($row['account_status'] == 'valide') {
+                                            echo "<div class='btn-group'>";
+                                            $row_account_id = $row['account_id'];
+                                            echo "<a href='../controllers/pdo_b_delete_acc.php?acc_id=".$row_account_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
+                                        }
+                                        else if ($row['account_status'] == 'pending') {
+                                            echo "<div class='btn-group'>";
+                                            $row_account_id = $row['account_id'];
+                                            echo "<a href='../controllers/pdo_b_validate_acc.php?acc_id=".$row_account_id."'><button type='button' class='btn btn-primary'>Valider </button></a></div>";
+                                            echo "<a href='../controllers/pdo_b_reject_acc.php?acc_id=".$row_account_id."'><button type='button' class='btn btn-primary'>Refuser </button></a></div>";
+                                            
 
-                    } else{
-                        echo "<p class='lead'><em>Vous n'avez aucun compte à valider </em></p>";
-                    }
+                                        }
+                                        else if ($row['account_status'] == 'rejected') {
+                                            echo "<p class='lead'><em>Cette demande de compte a été rejetée </em></p>";
+                                            
+                                        }
+                                        echo "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                        } else{
+                            echo "<p class='lead'><em>Ce client n'a pas de compte bancaire pour le moment </em></p>";
+                        }
 
                 // Close connection
                 $accounts->closeCursor();

@@ -50,9 +50,9 @@ include '../modules/b_select_user.php';
                                 echo "<tr>";
                                     echo "<td>" . $row['ope_id'] . "</td>";
                                     echo "<td>" . $row['ope_method'] . "</td>";
-                                    include "../controllers/pdo_u_ope_benef.php";
+                                    include "../controllers/pdo_b_ope_benef.php";
                                     echo "<td>" . $row['ope_date'] . "</td>";
-                                    include "../controllers/pdo_u_ope_amount.php";
+                                    include "../controllers/pdo_b_ope_amount.php";
                                     
                                 echo "</tr>";
                             }

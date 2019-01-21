@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION["user_id"])) {
+if(isset($_SESSION["agency_id"])) {
 require_once "../controllers/pdo_connect.php";
 include '../modules/head.php';
 include '../modules/b_nav_bar.php';
@@ -56,11 +56,23 @@ include '../modules/b_select_user.php';
                                     echo "<td>" . $row['account_rib'] . "</td>";
                                     echo "<td>" . $row['benef_status'] . "</td>";
                                     echo "<td>";
-                                        if ($row['benef_status'] == 'valide') {
+                                    if ($row['benef_status'] == 'valide') {
                                         echo "<div class='btn-group'>";
                                         $row_benef_id = $row['benef_id'];
-                                        echo "<a href='../controllers/pdo_u_delete_benef.php?benef_id=".$row_benef_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
-                                        }
+                                        echo "<a href='../controllers/pdo_b_delete_benef.php?acc_id=".$row_benef_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
+                                    }
+                                    else if ($row['benef_status'] == 'pending') {
+                                        echo "<div class='btn-group'>";
+                                        $row_benef_id = $row['benef_id'];
+                                        echo "<a href='../controllers/pdo_b_validate_benef.php?acc_id=".$row_benef_id."'><button type='button' class='btn btn-primary'>Valider </button></a></div>";
+                                        echo "<a href='../controllers/pdo_b_reject_benef.php?acc_id=".$row_benef_id."'><button type='button' class='btn btn-primary'>Rejeter </button></a></div>";
+                                        
+
+                                    }
+                                    else if ($row['benef_status'] == 'rejected') {
+                                        echo "<p class='lead'><em>Cette demande de beneficiaire a été rejetée </em></p>";
+                                        
+                                    }
                                     echo "</td>";
                                 echo "</tr>";
                             }

@@ -47,8 +47,8 @@ include '../modules/b_select_user.php';
                                     echo "<td>";
                                         echo "<div class='btn-group'>";
                                         $row_agency_id = $row['agency_id'];
-                                        echo "<a href='../controllers/pdo_b_delete_acc.php?acc_id=".$row_agency_id."'><button type='button' class='btn btn-primary'>Supprimer </button></a></div>";
-                                    echo "</td>";
+                                        echo "<a href='../controllers/pdo_b_modify_agency.php?acc_id=".$row_agency_id."'><button type='button' class='btn btn-primary'>Modifier </button></a></div>";
+                                        echo "</td>";
                                 echo "</tr>";
                             }
                             echo "</tbody>";                            
