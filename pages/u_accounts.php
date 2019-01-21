@@ -10,13 +10,23 @@ include '../modules/u_nav_bar.php';
 
 ?>
 
-
-<div class="wrapper">
-    <div class="container-fluid">
+<div class="container" style = "padding-top: 68px;
+    padding-bottom: 50px;">
         <div class="row">
-            <div class="col-md-12">
-                <div class="page-header clearfix">
-                    <h2 class="pull-left">Detail de mes comptes</h2>
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="card-title mb-4">
+                            <div class="d-flex justify-content-start">
+                                <div class="userData ml-3">
+                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">
+                                    Les comptes de 
+                                    <?php echo $_SESSION["user_last_name"]. " " . $_SESSION["user_first_name"]; ?></h2>
+                                </div>
+                            </div>
+                        </div>
+
                     <a href="u_create_account.php" class="btn btn-success">Nouveau compte</a>
                 </div>
 
@@ -32,7 +42,6 @@ include '../modules/u_nav_bar.php';
                         echo "<table class='table table-bordered table-striped'>";
                             echo "<thead>";
                                 echo "<tr>";
-                                    echo "<th>Clé</th>";
                                     echo "<th>Nom</th>";
                                     echo "<th>Type</th>";
                                     echo "<th>RIB</th>";
@@ -44,7 +53,6 @@ include '../modules/u_nav_bar.php';
                             echo "<tbody>";
                             while($row = $accounts->fetch()){
                                 echo "<tr>";
-                                    echo "<td>" . $row['account_id'] . "</td>";
                                     echo "<td>" . $row['account_name'] . "</td>";
                                     echo "<td>" . $row['account_type'] . "</td>";
                                     echo "<td>" . $row['account_rib'] . "</td>";
@@ -75,10 +83,10 @@ include '../modules/u_nav_bar.php';
                     echo "Your session has expired, please login again.";
                 }
                 ?>
-            </div>
-        </div>        
-    </div>
+        </div>
+    </div>        
 </div>
+
 
 <?php include '../modules/end.php';
 

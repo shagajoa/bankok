@@ -66,7 +66,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 } elseif ($count_4 == 0) {
                     $account_rib_2_err = "Ce RIB n'est pas validé ou ne vous appartient pas. Aussi, votre compte épargne ne peut pas avoir comme bénéficiaire le compte d'un autre client.";
                 }
-
         }
 
         //vérifier que la combinaison des deux comptes n'existent pas déjà
@@ -100,5 +99,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             exit();
         }
     }
-
 }

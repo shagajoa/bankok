@@ -6,19 +6,19 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="https://www.pymnts.com/wp-content/uploads/2018/05/bank.jpg" alt="First slide">
+            <img class="d-block w-100" style="height:700px;" src="../images/temple.jpg" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Bienvenue sur BankOK</h5>
             </div>
         </div>
     <div class="carousel-item">
-        <img class="d-block w-100" src="https://assets-blog.fundera.com/assets/wp-content/uploads/2016/09/14152559/bank-of-america-best-for-small-business.jpg" alt="Second slide">
+        <img class="d-block w-100" style="height:700px;" src="../images/tower.jpg" alt="Second slide">
         <div class="carousel-caption d-none d-md-block">
             <h5>La banque de confiance</h5>
         </div>
     </div>
     <div class="carousel-item">
-        <img class="d-block w-100" src="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjmuYLDy4bfAhWwXRUIHeKEBOUQjRx6BAgBEAU&url=https%3A%2F%2Fbusinessinsightandtrends.wordpress.com%2F2018%2F02%2F07%2Fbank-indonesia-ready-to-resume-discussions-on-redenomination-plan%2F&psig=AOvVaw0FbBx6NlWm9uG1rsiVQKDW&ust=1544027008412295" alt="Third slide">
+        <img class="d-block w-100" style="height:700px;" src="../images/pray_woman.jpg" alt="Third slide">
         <div class="carousel-caption d-none d-md-block">
             <h5>mais qui s'en met plein les fouilles</h5>
         </div>

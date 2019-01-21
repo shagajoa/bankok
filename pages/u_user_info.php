@@ -46,7 +46,6 @@ include '../modules/u_nav_bar.php';
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 <?php echo $_SESSION["user_last_name"]; ?>
-                                                <a href="../controllers/pdo_u_modify_user.php?last_name='<?php echo $_SESSION["user_last_name"]; ?>'"><button type='button' class='btn btn-primary'>Modifier</button></a>
                                             </div>
                                         </div>
                                         <hr />
@@ -56,7 +55,6 @@ include '../modules/u_nav_bar.php';
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 <?php echo $_SESSION["user_first_name"]; ?>
-                                                <a href="../controllers/pdo_u_modify_user.php?last_name='<?php echo $_SESSION["user_first_name"]; ?>'"><button type='button' class='btn btn-primary'>Modifier</button></a>
                                             </div>
                                         </div>
                                         <hr />
@@ -66,7 +64,6 @@ include '../modules/u_nav_bar.php';
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 <?php echo $_SESSION["user_email"]; ?>
-                                                <a href="../controllers/pdo_u_modify_user.php?last_name='<?php echo $_SESSION["user_email"]; ?>'"><button type='button' class='btn btn-primary'>Modifier</button></a>
                                             </div>
                                         </div>
                                         <hr />
@@ -76,7 +73,6 @@ include '../modules/u_nav_bar.php';
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 <?php echo $_SESSION["user_phone"]; ?>
-                                                <a href="../controllers/pdo_u_modify_user.php?last_name='<?php echo $_SESSION["user_phone"]; ?>'"><button type='button' class='btn btn-primary'>Modifier</button></a>
                                             </div>
                                         </div>
                                         <hr />
@@ -86,7 +82,6 @@ include '../modules/u_nav_bar.php';
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 <?php echo $_SESSION["user_date_of_birth"]; ?>
-                                                <a href="../controllers/pdo_u_modify_user.php?last_name='<?php echo $_SESSION["user_date_of_birth"]; ?>'"><button type='button' class='btn btn-primary'>Modifier</button></a>
                                             </div>
                                         </div>
 
@@ -98,7 +93,6 @@ include '../modules/u_nav_bar.php';
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 <?php echo $add_number; ?>
-                                                <a href="../controllers/pdo_u_modify_user.php?last_name='<?php echo $add_number; ?>'"><button type='button' class='btn btn-primary'>Modifier</button></a>
                                             </div>
                                         </div>
                                         <hr />
@@ -108,7 +102,6 @@ include '../modules/u_nav_bar.php';
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 <?php echo $add_street; ?>
-                                                <a href="../controllers/pdo_u_modify_user.php?last_name='<?php echo $add_street; ?>'"><button type='button' class='btn btn-primary'>Modifier</button></a>
                                             </div>
                                         </div>
                                         <hr />
@@ -118,7 +111,6 @@ include '../modules/u_nav_bar.php';
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 <?php echo $add_postal_code; ?>
-                                                <a href="../controllers/pdo_u_modify_user.php?last_name='<?php echo $add_postal_code; ?>'"><button type='button' class='btn btn-primary'>Modifier</button></a>
                                             </div>
                                         </div>
                                         <hr />
@@ -128,7 +120,6 @@ include '../modules/u_nav_bar.php';
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 <?php echo $add_city; ?>
-                                                <a href="../controllers/pdo_u_modify_user.php?last_name='<?php echo $add_city; ?>'"><button type='button' class='btn btn-primary'>Modifier</button></a>
                                             </div>
                                         </div>
                                     </div>

@@ -10,13 +10,23 @@ include '../modules/u_nav_bar.php';
 
 ?>
 
-
-<div class="wrapper">
-    <div class="container-fluid">
+<div class="container" style = "padding-top: 68px;
+    padding-bottom: 50px;">
         <div class="row">
-            <div class="col-md-12">
-                <div class="page-header clearfix">
-                    <h2 class="pull-left">Mes bénéficiaires</h2>
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="card-title mb-4">
+                            <div class="d-flex justify-content-start">
+                                <div class="userData ml-3">
+                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">
+                                    Les bénéficiaires de
+                                    <?php echo $_SESSION["user_last_name"]. " " . $_SESSION["user_first_name"]; ?></h2>
+                                </div>
+                            </div>
+                        </div>
+
                     <a href="u_create_benef.php" class="btn btn-success">Nouveau bénéficiaire</a>
                 </div>
 
