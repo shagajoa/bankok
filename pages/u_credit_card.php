@@ -10,8 +10,7 @@ include '../modules/u_nav_bar.php';
 
 ?>
 
-<div class="container" style = "padding-top: 68px;
-    padding-bottom: 50px;">
+<div class="container" style = "padding-top: 68px;padding-bottom: 50px;">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -19,7 +18,7 @@ include '../modules/u_nav_bar.php';
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
-                                <div class="userData ml-3">
+                                <div class="userData">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">
                                     Les cartes de 
                                     <?php echo $_SESSION["user_last_name"]. " " . $_SESSION["user_first_name"]; ?></h2>
@@ -27,7 +26,7 @@ include '../modules/u_nav_bar.php';
                             </div>
                         </div>
 
-                    <a href="#" class="btn btn-success">Nouvelle carte</a>
+                    <a href="u_create_card.php" class="btn btn-success">Nouvelle carte</a>
                 </div>
 
                 <div class="panel-group" id="accordion" >
@@ -74,18 +73,18 @@ include '../modules/u_nav_bar.php';
                                                 echo "<td>" . $row_c['card_serial'] . "</td>";
                                                 echo "<td>" . $row_c['card_status'] . "</td>";
                                                 echo "<td>" . $row_c['card_exp_date'] . "</td>";
-                                                echo "<td>";
-                                                if ($row_c['card_status'] == 'valide') {
-                                                    echo "<div class='btn-group'>";
-                                                    $row_card_id = $row_c['card_id'];
-                                                    echo "<a href='#?card_id=".$row_card_id."'><button type='button' class='btn btn-primary'> Faire opposition </button></a></div>";
-                                                }
-                                                echo "</td>";
+                                                // echo "<td>";
+                                                // if ($row_c['card_status'] == 'valide') {
+                                                //     echo "<div class='btn-group'>";
+                                                //     $row_card_id = $row_c['card_id'];
+                                                //     echo "<a href='#?card_id=".$row_card_id."'><button type='button' class='btn btn-primary'> Faire opposition </button></a></div>";
+                                                // }
+                                                // echo "</td>";
                                             echo "</tr>";
                                         } ?>
                                         </table>
                                     <?php 
-                                    } else {echo "<p class='lead'><em>Vous n'avez pas encore de compte bancaire. Veuillez en créer un. </em></p>"; } 
+                                    } else {echo " <tr><p class='lead'><em> Vous n'avez pas de carte bancaire. Sheh! </em></p></tr>"; } 
                                 echo "</div>";  
                             echo "</div>"; 
                         $i++; } ?>

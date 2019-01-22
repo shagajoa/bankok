@@ -18,6 +18,7 @@ include '../modules/b_nav_bar.php';
 
                 <?php
 
+
                 $accounts = $bdd->prepare('SELECT * FROM users WHERE agency_id = ?');
                 $accounts->execute(array($_SESSION["agency_id"]));
                 $count = $accounts->rowCount();
@@ -41,16 +42,6 @@ include '../modules/b_nav_bar.php';
                                     echo "<td>" . $row['user_email'] . "</td>";
                                     echo "<td>" . $row['user_phone'] . "</td>";
                                     echo "<td>" . $row['user_date_of_birth'] . "</td>";
-                                    echo "<td>";
-                                        echo "  <div class='btn-group'>
-                                                <a href=b_modify_user.php> <button type='button' class='btn btn-primary'>Modifier </button>
-                                                </div>
-                                                ";
-                                        echo "  <div class='btn-group'>
-                                        <a href=b_delete_user.php> <button type='button' class='btn btn-primary'>Supprimer </button>
-                                        </div>
-                                        ";
-                                    echo "</td>";
                                 echo "</tr>";
                             }
                             echo "</tbody>";                            

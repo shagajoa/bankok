@@ -6,19 +6,19 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" style="height:700px;" src="../images/temple.jpg" alt="First slide">
+            <img class="d-block w-100" style="height:calc(100vh - 56px);" src="../images/temple.jpg" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Bienvenue sur BankOK</h5>
             </div>
         </div>
     <div class="carousel-item">
-        <img class="d-block w-100" style="height:700px;" src="../images/tower.jpg" alt="Second slide">
+        <img class="d-block w-100" style="height:calc(100vh - 56px);" src="../images/tower.jpg" alt="Second slide">
         <div class="carousel-caption d-none d-md-block">
             <h5>La banque de confiance</h5>
         </div>
     </div>
     <div class="carousel-item">
-        <img class="d-block w-100" style="height:700px;" src="../images/pray_woman.jpg" alt="Third slide">
+        <img class="d-block w-100" style="height:calc(100vh - 56px);" src="../images/pray_woman.jpg" alt="Third slide">
         <div class="carousel-caption d-none d-md-block">
             <h5>mais qui s'en met plein les fouilles</h5>
         </div>

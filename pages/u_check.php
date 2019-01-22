@@ -19,7 +19,7 @@ include '../modules/u_nav_bar.php';
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
-                                <div class="userData ml-3">
+                                <div class="userData">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">
                                     Les chéquiers de
                                     <?php echo $_SESSION["user_last_name"]. " " . $_SESSION["user_first_name"]; ?></h2>
@@ -27,7 +27,7 @@ include '../modules/u_nav_bar.php';
                             </div>
                         </div>
 
-                    <a href="#" class="btn btn-success">Nouveau chéquier</a>
+                    <a href="u_create_check.php" class="btn btn-success">Nouveau chéquier</a>
                 </div>
 
 
@@ -77,7 +77,7 @@ include '../modules/u_nav_bar.php';
                                         } ?>
                                         </table>
                                     <?php 
-                                    } else {echo `<p class='lead'><em>Vous n'avez pas encore de chéquier, vous pouvez en commander un en cliquant sur "Nouveau chéquier" </em></p>`; } 
+                                    } else {echo " <tr><p class='lead'><em> Vous n'avez pas de check..yeah ;)</em></p></tr>"; } 
                                 echo "</div>";  
                             echo "</div>"; 
                         $i++; } ?>

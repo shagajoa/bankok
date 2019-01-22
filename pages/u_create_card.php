@@ -4,7 +4,7 @@ session_start();
 
 if(isset($_SESSION["user_id"])) {
 
-require_once '../controllers/pdo_u_create_benef.php';
+require_once '../controllers/pdo_u_create_card.php';
 include '../modules/head.php';
 include '../modules/u_nav_bar.php';
 
@@ -15,32 +15,53 @@ include '../modules/u_nav_bar.php';
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
         <div class="form-group row">
-            <label for="amount" class="col-sm-3 col-form-label">Type de carte</label>
-            <div class="col-sm-10">
-                <label class="radio-inline"><input type="radio" name="card" value="Electron">Electron
-                <img src="../images/card_electron.jpg" width=100px></label>
-                <label class="radio-inline"><input type="radio" name="card" value="Classic">Classic
-                <img src="../images/card_classic.jpg" width=100px></label>
-                <label class="radio-inline" ><input type="radio" name="card" value="Premier">Premier
-                <img src="../images/card_premier.jpg" width=100px></label> 
-                </div>
-        </div>
-        
-        <div class="form-group row">
-            <label for="amount" class="col-sm-3 col-form-label">Type de carte</label>
-            <div class="col-sm-5">
+        <label for="amount" class="col-sm-2 col-form-label">Type de carte</label>
+            <div class="card-group">
+            
+                <div class="card-body">
+                    
+                    <h5 class="radio-inline">
+                    <input type="radio" name="card" value="Electron"> Electron
+                    <img src="../images/card_electron.jpg" width=100px>
+                    </h5>
 
-            <!-- <select class="image-picker show-html">
-                <option value="0"> -- Aucune sélection --</option>
-                <option data-img-src="../images/card_electron.jpg" value="Electron">Electron</option>
-                <option data-img-src="../images/card_classic.jpg" value="Classic">Classic</option>
-                <option data-img-src="../images/card_premium.jpg" value="Premium">Premium</option>
-                </select>
-            </div> -->
+                </div>
+                
+                <div class="card-body">
+
+                    <h5 class="radio-inline">
+                    <input type="radio" name="card" value="Classic"> Classic
+                    <img src="../images/card_classic.jpg" width=100px>
+                    </h5>
+
+                </div>
+
+                
+                <div class="card-body">
+
+                    <h5 class="radio-inline">
+                    <input type="radio" name="card" value="Premier"> Premier
+                    <img src="../images/card_premier.jpg" width=100px>
+                    </h5>
+
+                </div>
+                
+            </div>
+            </div>
+
+
+        <div class="form-group row">
+            <label for="amount" class="col-sm-2 col-form-label">Mon compte</label>
+
+            <select name='my_account' class="form-control">
+            <?php require_once '../controllers/pdo_u_card_acc.php';?>
+            </select>
+
+            <small class="form-text text-muted"><?php echo $my_account_err;?></small>
             
         </div>
             <input type="submit" value="Valider" class='btn btn-primary'>
-            <input type="button" value="Annuler" class='btn btn-primary' onClick="document.location.href='../pages/u_benef.php'" />
+            <input type="button" value="Annuler" class='btn btn-primary' onClick="document.location.href='../pages/u_credit_card.php'" />
     </form>
 </div>
 

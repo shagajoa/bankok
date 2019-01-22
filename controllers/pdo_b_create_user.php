@@ -1,126 +1,211 @@
 <?php
-// Include config file
+
+#------------------------------------------------------------
+# INIIALISATION
+#------------------------------------------------------------
+
+
+
+// connexion a MySql avec PDO
 require_once "../controllers/pdo_connect.php";
- 
-// Define variables and initialize with empty values
-$nom = $prenom = $mail = $tel = $datenaissance = "";
-$nom_err = $prenom_err = $mail_err = $tel_err = $datenaissance_err = "";
- 
-// Processing form data when form is submitted
-if(isset($_POST["id"]) && !empty($_POST["id"])){
-    // Get hidden input value
-    $id = $_POST["id"];
-    
-    $input_prenom = trim($_POST["prenom"]);
-    if(empty($input_prenom)){
-        $prenom_err = "Entrer un prénom.";     
-    } else{
-        $prenom = $input_prenom;
-    }
-    
-    // Validate mail
-    $input_mail = trim($_POST["mail"]);
-    if(empty($input_mail)){
-        $mail_err = "Entrer une adresse mail.";
-    } else{
-        $mail = $input_mail;
-    }
-     // Validate tel
-     $input_tel = trim($_POST["tel"]);
-     if(empty($input_tel)){
-         $tel_err = "Entrer un numéro de téléphone.";
-     } else{
-         $tel = $input_tel;
-     }
-      // Validate date de naissance
-    $input_datenaissance = trim($_POST["datenaissance"]);
-    if(empty($input_datenaissance)){
-        $datenaissance_err = "Entrer une date de naissance";
-    } else{
-        $datenaissance = $input_datenaissance;
-    }
-    
-    // Check input errors before inserting in database
-    if(empty($nom_err) && empty($prenom_err) && empty($mail_err) && empty($tel_err) && empty($datenaissance_err)){
-        // Prepare an update statement
-        $sql = "UPDATE USERS SET USER_LAST_NAME=?, USER_FIRST_NAME=?, USER_MAIL=?, USER_PHONE=?, USER_DATE_OF_BIRTH=? WHERE USER_ID=?";
-         
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssi", $param_nom, $param_prenom, $param_mail, $param_tel, $param_datenaissance);
-            
-            // Set parameters
-            $param_nom = $Nom;
-            $param_prenom = $Prénom;
-            $param_mail = $email;
-            $param_tel = $Tél;
-            $param_datenaissance = $Date_de_naissance;
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Records updated successfully. Redirect to landing page
-                header("location: b_utilisateurs.php");
-                exit();
-            } else{
-                echo "Erreur, recommencez plus tard svp. Sawatdee.";
-            }
-        }
-         
-        // Close statement
-        mysqli_stmt_close($stmt);
-    }
-    
-    // Close connection
-    mysqli_close($link);
+
+$user_last_name = '';
+$user_first_name = '';
+$user_email = '';
+$user_password = '';
+$user_phone = '';
+$user_date_of_birth = '';
+$add_number = '';
+$add_street = '';
+$add_postal_code = '';
+$add_city = '';
+
+$last_name_err = '';
+$first_name_err = '';
+$email_err = '';
+$password_err = '';
+$phone_err = '';
+$date_of_birth_err = '';
+$number_err = '';
+$street_err = '';
+$postal_code_err = '';
+$city_err = '';
+
+#------------------------------------------------------------
+# LANCEMENT DU FORMULAIRE
+#------------------------------------------------------------
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+#------------------------------------------------------------
+# VERIFICATION DES INPUT
+#------------------------------------------------------------
+
+if(empty($_POST["user_last_name"])) {
+    $last_name_err = "Please enter your last name.";
 } else{
-    // Check existence of id parameter before processing further
-    if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
-        // Get URL parameter
-        $id =  trim($_GET["id"]);
-        
-        // Prepare a select statement
-        $sql = "SELECT * FROM USERS WHERE USER_ID = ?";
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "i", $param_id);
-            
-            // Set parameters
-            $param_id = $id;
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                $result = mysqli_stmt_get_result($stmt);
-    
-                if(mysqli_num_rows($result) == 1){
-                    /* Fetch result row as an associative array. Since the result set contains only one row, we don't need to use while loop */
-                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    
-                    // Retrieve individual field value
-                $nom = $row["USER_LAST_NAME"];
-                $prenom = $row["USER_FIRST_NAME"];
-                $mail = $row["USER_EMAIL"];
-                $tel = $row["USER_PHONE"];
-                $date_naissance = $row["USER_DATE_OF_BIRTH"];
-                } else{
-                    // URL doesn't contain valid id. Redirect to error page
-                    header("location: b_error.php");
-                    exit();
-                }
+    $user_last_name = $_POST["user_last_name"];
+}
+
+if(empty($_POST["user_first_name"])) {
+    $first_name_err = "Please enter your first name.";
+} else{
+    $user_first_name = $_POST["user_first_name"];
+}
+
+// l'email ne peut pas être déjà existant dans la bdd
+// et doit avoir une nomenclature d'email "x@xxx.xx"
+$select_email = $bdd->prepare('SELECT * FROM users WHERE user_email = ?');
+$select_email->execute(array($_POST["user_email"]));
+$count = $select_email->rowCount();
                 
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
-        
-        // Close statement
-        mysqli_stmt_close($stmt);
-        
-        // Close connection
-        mysqli_close($link);
-    }  else{
-        // URL doesn't contain id parameter. Redirect to error page
-        header("location: b_error.php");
-        exit();
-    }
+if($count > 0){
+    $email_err = "This email already exists.";
+} elseif(empty($_POST["user_email"])){
+    $email_err = "Please enter your email.";
+} else{
+    $user_email = $_POST["user_email"];
+}
+
+if(empty($_POST["user_password"])) {
+    $password_err = "Please enter a password.";
+} elseif(strlen($_POST["user_password"]) < 8) {
+    $password_err = "At least 8 characters required.";
+} else {
+    $user_password = $_POST["user_password"];
+}
+
+if(empty($_POST["user_phone"])) {
+    $phone_err = "Please enter your phone number.";
+} else{
+    $user_phone = $_POST["user_phone"];
+}
+
+if(empty($_POST["user_date_of_birth"])) {
+    $date_of_birth_err = "Please enter your date of birth.";
+} else{
+    $user_date_of_birth = $_POST["user_date_of_birth"];
+}
+
+if(empty($_POST["add_number"])) {
+    $number_err = "Please enter your street number.";
+} elseif(!ctype_digit($_POST["add_number"])){
+        $number_err = "Please enter a positive integer.";
+} else{
+    $add_number = $_POST["add_number"];
+}
+
+if(empty($_POST["add_street"])) {
+    $street_err = "Please enter your street name.";
+} else{
+    $add_street = $_POST["add_street"];
+}
+
+if(empty($_POST["add_postal_code"])) {
+    $postal_code_err = "Please enter your postal code.";
+} elseif(strlen($_POST["add_postal_code"]) != 5) {
+    $postal_code_err = "Postal code has 5 digits.";
+} else {
+    $add_postal_code = $_POST["add_postal_code"];
+
+}
+
+if(empty($_POST["add_city"])) {
+    $city_err = "Please enter your city name.";
+} else{
+    $add_city = $_POST["add_city"];
+}
+
+// verifier qu'il n'y ait pas d'erreur
+if( empty($last_name_err) &&
+    empty($first_name_err) &&
+    empty($email_err) &&
+    empty($password_err) &&
+    empty($phone_err) &&
+    empty($date_of_birth_err) &&
+    empty($number_err) &&
+    empty($street_err) &&
+    empty($postal_code_err) &&
+    empty($city_err)) {
+
+#------------------------------------------------------------
+# PREPARATION DES REQUETES
+#------------------------------------------------------------
+
+    $insert_add = $bdd->prepare('INSERT INTO adresses(add_number, add_street, add_postal_code, add_city) VALUES(:add_number, :add_street, :add_postal_code, :add_city)');
+    $select_ag = $bdd->prepare('SELECT DISTINCT agency_id FROM agencies INNER JOIN adresses WHERE (agencies.add_id = adresses.add_id) and (LEFT(adresses.add_postal_code,2) = ?)');
+    $insert_user = $bdd->prepare('INSERT INTO users (user_last_name, user_first_name, user_email, user_password, user_phone, user_date_of_birth, user_active, agency_id, add_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $select_user = $bdd->prepare('SELECT * FROM users WHERE user_id = ?');
+
+#------------------------------------------------------------
+# EXECUTION
+#------------------------------------------------------------
+
+    // creer une nouvelle adresse
+    $insert_add->execute(array(
+        ':add_number' => $add_number,
+        ':add_street' => $add_street,
+        ':add_postal_code' => $add_postal_code,
+        ':add_city' => $add_city));
+
+    // recuperer l'id de cette nouvelle adresse
+    $new_add_id_string = $bdd->lastInsertId();
+    
+    // convertir l'id en integer
+    $new_add_id = intval($new_add_id_string);
+
+    // requete pour trouver l'agence associee a l'utilisateur grace au 2 premiers chiffres du code postal
+    $add_postal_code_2 = substr($_POST["add_postal_code"],0,2);
+    $select_ag->execute(array($add_postal_code_2));
+    
+    
+    // chercher l'id de cette agence
+    $found_agency = $select_ag->fetch();
+    
+    $select_ag_id = $found_agency['agency_id'];
+
+    // creer un nouvel utilisateur
+    $insert_user->execute(array($user_last_name,$user_first_name,$user_email,password_hash($user_password, PASSWORD_DEFAULT),$user_phone,$user_date_of_birth,true,$select_ag_id,$new_add_id));
+
+#------------------------------------------------------------
+# AFFECTATION VALEUR DE SESSION
+#------------------------------------------------------------
+    
+    session_regenerate_id();
+    
+    $new_user_id_string = $bdd->lastInsertId();
+    $new_user_id = intval($new_user_id_string);
+
+    $select_user->execute(array($new_user_id));
+    $found_user = $select_user->fetch();
+
+    $_SESSION["authorized"] = true;
+    $_SESSION["user_id"] = $new_user_id;
+    $_SESSION["user_last_name"] = $found_user["user_last_name"];
+    $_SESSION["user_first_name"] = $found_user["user_first_name"];
+    $_SESSION["user_email"] = $found_user["user_email"];
+    $_SESSION["user_password"] = $found_user["user_password"];
+    $_SESSION["user_phone"] = $found_user["user_phone"];
+    $_SESSION["user_date_of_birth"] = $found_user["user_date_of_birth"];
+
+    session_write_close();
+
+#------------------------------------------------------------
+# FERMETURE DES REQUETES
+#------------------------------------------------------------
+
+    $insert_add->closeCursor();
+    $select_ag->closeCursor();
+    $insert_user->closeCursor();
+
+#------------------------------------------------------------
+# REDIRECTION
+#------------------------------------------------------------
+    
+    header("location:../pages/b_home.php");
+    exit();
+
+}
+
 }
 ?>

@@ -6,7 +6,7 @@ include '../modules/b_nav_bar.php';
 
 ?>
 
-<h2> Créer un nouveau compte bancaire </h2>
+<h2> Créer un nouveau client </h2>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <p> Identifiant du client </p> <input type="text" name="user_id">
         <span class="help-block"><?php echo $user_id_err;?></span>

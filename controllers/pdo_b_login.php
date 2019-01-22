@@ -52,6 +52,18 @@ if(empty($_POST["agency_password"])) {
             $_SESSION["authorized"] = true;
             $_SESSION["agency_id"] = $admin["agency_id"];
             $_SESSION["agency_password"] = $admin["agency_password"];
+            $_SESSION["agency_name"] = $admin["agency_name"];
+
+
+            // chercher l'adresse de l'agence
+            $adress = $bdd->prepare("SELECT * FROM adresses a INNER JOIN agencies ag on a.add_id = ag.add_id WHERE ag.agency_id = 1");
+            $adress->execute(array($_POST['agency_id']));
+            $add = $adress->fetch();
+
+            $_SESSION["add_number"] = $add["add_number"];
+            $_SESSION["add_street"] = $add["add_street"];
+            $_SESSION["add_postal_code"] = $add["add_postal_code"];
+            $_SESSION["add_city"] = $add["add_city"];
 
             //fermeture de ssions pour libérer les données pour d'autres scripts
             session_write_close();

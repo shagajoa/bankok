@@ -1,7 +1,5 @@
 <?php
-
 session_start();
-
 ?>
 
 <html lang="en">
@@ -15,11 +13,7 @@ session_start();
 <body>
 
 <?php 
-
 include '../modules/b_nav_bar.php';
-
 include '../modules/caroussel.php';
-
 include '../modules/end.php'; 
-
 ?>

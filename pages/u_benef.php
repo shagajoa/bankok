@@ -19,7 +19,7 @@ include '../modules/u_nav_bar.php';
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
-                                <div class="userData ml-3">
+                                <div class="userData">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">
                                     Les bénéficiaires de
                                     <?php echo $_SESSION["user_last_name"]. " " . $_SESSION["user_first_name"]; ?></h2>
