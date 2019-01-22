@@ -1,0 +1,2 @@
+Pour accéder à l'interface client : http://localhost/bankok/pages/b_login.php
+Pour accéder à l'interface administrateur / agence : http://localhost/bankok/pages/u_login.php

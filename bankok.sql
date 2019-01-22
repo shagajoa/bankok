@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 15 jan. 2019 à 15:03
+-- Généré le :  mar. 22 jan. 2019 à 13:28
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -20,9 +20,9 @@ SET time_zone = "+00:00";
 
 --
 -- Base de données :  `bankok`
-
-create database bankok;
 --
+CREATE DATABASE IF NOT EXISTS `bankok` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `bankok`;
 
 -- --------------------------------------------------------
 
@@ -46,15 +46,18 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`account_id`, `account_name`, `account_type`, `account_rib`, `account_balance`, `account_overdraft`, `account_user_id`, `account_status`) VALUES
-(1, 'Courant', 'Courant', '3E3JF6OGSZISPJ9UKJDK43K', -9695, 200, 1, 'valide'),
+(1, 'Courant', 'Courant', '3E3JF6OGSZISPJ9UKJDK43K', -9584, 200, 1, 'valide'),
 (3, 'Courant', 'Courant', '65QGTJLXY3XYNZUCPOP9PRG', 21829, 500, 15, 'valide'),
 (4, 'Epargne', 'Epargne', 'KBTRJI5TGTL076G6GVC0VYT', 555, 500, 15, 'pending'),
-(5, 'Livret A', 'Epargne', 'RRLFTTF2YW57ZIU6QOW4COI', 12468, 500, 15, 'valide'),
+(5, 'Livret A', 'Epargne', 'RRLFTTF2YW57ZIU6QOW4COI', 12924, 500, 15, 'valide'),
 (6, 'Livret B', 'Epargne', 'J4T8Z2B9FX7YZ49CVEY7THW', -400, 500, 15, 'pending'),
 (8, 'Epargne anais', 'Epargne', 'O91EH3VXFJ8L9QTTU2WHSF1', 500, 500, 1, 'valide'),
-(11, 'Courant3', 'Courant', 'BVNETTOJVQ3990K5JXW1FN4', 0, 500, 15, 'valide'),
+(11, 'Courant3', 'Courant', 'BVNETTOJVQ3990K5JXW1FN4', -345, 500, 15, 'valide'),
 (12, 'PEL', 'Epargne', 'X0UBMMHBWBQKNTU66K11YRE', 67000, 500, 15, 'pending'),
-(13, 'Courant2', 'Courant', 'AZERTYUIOPMLKJHGFDSQWXC', 1000, 500, 1, 'valide');
+(13, 'Courant2', 'Courant', 'AZERTYUIOPMLKJHGFDSQWXC', 1000, 500, 1, 'rejected'),
+(14, 'Nouveau C', 'Courant', 'URDI2SHJHFLKTEUF8R4BCYU', 100000000, 500, 15, 'pending'),
+(15, 'Courant de m', 'Courant', 'SH05IH7YA1BUU6RV2D4MAXK', 449, 500, 17, 'valide'),
+(16, 'Compte courant', 'Courant', 'HMQUH027D18CVX1SB5JV2M9', 1889, 500, 18, 'valide');
 
 -- --------------------------------------------------------
 
@@ -92,7 +95,11 @@ INSERT INTO `adresses` (`add_id`, `add_number`, `add_street`, `add_postal_code`,
 (17, 56, 'Boulevard de la saussaye', '92200', 'Neuilly sur seine'),
 (18, 56, 'Boulevard de la saussaye', '92200', 'Neuilly sur seine'),
 (19, 56, 'Boulevard de la saussaye', '92200', 'Neuilly sur seine'),
-(20, 56, 'Boulevard de la saussaye', '92200', 'Neuilly sur seine');
+(20, 56, 'Boulevard de la saussaye', '92200', 'Neuilly sur seine'),
+(21, 17, 'rue ouf', '75011', 'Paris'),
+(22, 67, 'bld loulou', '75019', 'PARIS'),
+(23, 20, 'Rue Kougtach', '75016', 'PARIS'),
+(24, 56, 'Rue de l\'eau', '92200', 'Puteaux');
 
 -- --------------------------------------------------------
 
@@ -136,7 +143,66 @@ INSERT INTO `beneficiaries` (`benef_id`, `account_id_1`, `account_id_2`, `benef_
 (17, 3, 11, 'rejected'),
 (18, 11, 5, 'valide'),
 (19, 5, 3, 'pending'),
-(20, 5, 11, 'pending');
+(20, 5, 11, 'pending'),
+(21, 1, 13, 'valide'),
+(22, 15, 11, 'valide'),
+(23, 16, 1, 'valide');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ccard`
+--
+
+CREATE TABLE `ccard` (
+  `card_id` int(11) NOT NULL,
+  `card_type` enum('Electron','Classic','Premium') COLLATE utf8_bin DEFAULT NULL,
+  `card_serial` bigint(16) DEFAULT NULL,
+  `card_account_id` int(11) DEFAULT NULL,
+  `card_user_id` int(11) DEFAULT NULL,
+  `card_status` enum('valide','pending','rejected','opposed') COLLATE utf8_bin DEFAULT NULL,
+  `card_exp_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `ccard`
+--
+
+INSERT INTO `ccard` (`card_id`, `card_type`, `card_serial`, `card_account_id`, `card_user_id`, `card_status`, `card_exp_date`) VALUES
+(2, 'Premium', 987654321123456, 3, 15, 'valide', '2019-01-14'),
+(3, 'Electron', 1234123412341234, 11, 15, 'valide', '2019-01-15'),
+(4, 'Classic', 14479399879301434, 3, NULL, 'valide', '2022-01-22'),
+(6, 'Electron', 15673183805595489, 11, NULL, 'valide', '2022-01-22'),
+(8, 'Electron', 89469525233259272, 3, NULL, 'valide', '2022-01-22'),
+(9, 'Electron', 71492380444733075, 3, NULL, 'valide', '2022-01-22'),
+(10, 'Electron', 81745515919308440, 3, NULL, 'valide', '2022-01-22'),
+(11, 'Electron', 64639713296750410, 15, NULL, 'valide', '2022-01-22'),
+(12, 'Classic', 81443741249375453, 16, NULL, 'valide', '2022-01-22');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cheq`
+--
+
+CREATE TABLE `cheq` (
+  `cheq_id` int(11) NOT NULL,
+  `cheq_serial` bigint(16) DEFAULT NULL,
+  `cheq_account_id` int(11) DEFAULT NULL,
+  `cheq_pages` int(2) DEFAULT NULL,
+  `cheq_status` enum('valide','pending','rejected') COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `cheq`
+--
+
+INSERT INTO `cheq` (`cheq_id`, `cheq_serial`, `cheq_account_id`, `cheq_pages`, `cheq_status`) VALUES
+(1, 1234123412341234, 11, 30, 'valide'),
+(2, 1234567890123456, 3, 50, 'valide'),
+(4, 25682477925578175, 3, 50, 'valide'),
+(5, 27185725667981286, 11, 50, 'valide'),
+(6, 57140946260344783, 16, 50, 'valide');
 
 -- --------------------------------------------------------
 
@@ -166,22 +232,10 @@ INSERT INTO `operations` (`ope_id`, `ope_method`, `ope_amount`, `ope_date`, `ope
 (9, 'transfer', 12345, '2019-01-14', 1, 3),
 (10, 'transfer', 1500, '2019-01-14', 8, 1),
 (11, 'transfer', 111, '2019-01-14', 3, 4),
-(12, 'transfer', 123, '2019-01-15', 11, 5);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `payment_methods`
---
-
-CREATE TABLE `payment_methods` (
-  `payment_id` int(11) NOT NULL,
-  `payment_method` enum('check','credit card') COLLATE utf8_bin DEFAULT NULL,
-  `payment_serial_number` int(25) DEFAULT NULL,
-  `account_id` int(11) DEFAULT NULL,
-  `payment_date_order` date DEFAULT NULL,
-  `payment_status` enum('pending','valide','rejected') COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+(12, 'transfer', 123, '2019-01-15', 11, 5),
+(13, 'transfer', 456, '2019-01-22', 11, 5),
+(14, 'transfer', 111, '2019-01-22', 15, 11),
+(15, 'transfer', 111, '2019-01-22', 16, 1);
 
 -- --------------------------------------------------------
 
@@ -211,7 +265,10 @@ INSERT INTO `users` (`user_id`, `user_last_name`, `user_first_name`, `user_email
 (2, 'Billard', 'Corentin', 'coco@gmail.com', '$2y$10$aNzGIwejKjw09e0AqSAjwOX91mW/klY2jKJWV5fK.mAyN994bnSuu', '0987654321', '1995-11-12', 1, 6, 1),
 (3, 'Bernard', 'Pascal', 'papa@hotmail.fr', '$2y$10$OvikANSSVxQmlzgqqTyxluHpQIGFn/Ymb90pKd5EZ.VoKp9NjuD4a', '0987654321', '1958-04-17', 1, 7, 1),
 (4, 'BERNARD', 'AurÃ©lie', 'aur@hotmail.fr', '$2y$10$AIdz70oPc0bbFiAclHrK0e6FLGibJbFq/7r07/gD44WnwV0YYQ1U6', '0987654321', '1999-02-19', 1, 8, 1),
-(15, 'VIEL', 'ValÃ©rie', 'val@hotmail.fr', '$2y$10$eRVM1Zu6MkA.slgKXWLSeuF18xLqSNVULURz1G139OYj6B4BFprlC', '0987654321', '1960-02-03', 1, 20, 2);
+(15, 'VIEL', 'ValÃ©rie', 'val@hotmail.fr', '$2y$10$eRVM1Zu6MkA.slgKXWLSeuF18xLqSNVULURz1G139OYj6B4BFprlC', '0987654321', '1960-02-03', 1, 20, 2),
+(16, 'Lechanu', 'Mathilde', 'm.lc@hotmail.fr', '$2y$10$2.7Y47wyYPSLm0UXAH8KU.YW5vMErRJ2PUGlb7WR4GHo4Yf7vM91O', '0987654321', '1996-09-10', 1, 21, 1),
+(17, 'Bresson', 'Mathilde', 'm.bresson@hotmail.fr', '$2y$10$uuW.AOi4gNfwWREk2wILQuEXtRCyiSBgjZK18uJ5wIceoKyNcGr7G', '0987654321', '1997-10-20', 1, 22, 1),
+(18, 'Vintin', 'Ludovic', 'ludo@gmail.com', '$2y$10$MsVE2fCFb3Hc0vwb5cpCDOxy9ZmXnLJixS50zL7tIOZkah39aHT5e', '0987654321', '1999-11-10', 1, NULL, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -246,19 +303,27 @@ ALTER TABLE `beneficiaries`
   ADD KEY `account_id_2` (`account_id_2`);
 
 --
+-- Index pour la table `ccard`
+--
+ALTER TABLE `ccard`
+  ADD PRIMARY KEY (`card_id`),
+  ADD KEY `card_account_id` (`card_account_id`),
+  ADD KEY `card_user_id` (`card_user_id`);
+
+--
+-- Index pour la table `cheq`
+--
+ALTER TABLE `cheq`
+  ADD PRIMARY KEY (`cheq_id`),
+  ADD KEY `cheq_account_id` (`cheq_account_id`);
+
+--
 -- Index pour la table `operations`
 --
 ALTER TABLE `operations`
   ADD PRIMARY KEY (`ope_id`),
   ADD KEY `ope_acc_id_1` (`ope_acc_id_1`),
   ADD KEY `ope_acc_id_2` (`ope_acc_id_2`);
-
---
--- Index pour la table `payment_methods`
---
-ALTER TABLE `payment_methods`
-  ADD PRIMARY KEY (`payment_id`),
-  ADD KEY `account_id` (`account_id`);
 
 --
 -- Index pour la table `users`
@@ -276,13 +341,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `adresses`
 --
 ALTER TABLE `adresses`
-  MODIFY `add_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `add_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `agencies`
@@ -294,25 +359,31 @@ ALTER TABLE `agencies`
 -- AUTO_INCREMENT pour la table `beneficiaries`
 --
 ALTER TABLE `beneficiaries`
-  MODIFY `benef_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `benef_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT pour la table `ccard`
+--
+ALTER TABLE `ccard`
+  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT pour la table `cheq`
+--
+ALTER TABLE `cheq`
+  MODIFY `cheq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `operations`
 --
 ALTER TABLE `operations`
-  MODIFY `ope_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT pour la table `payment_methods`
---
-ALTER TABLE `payment_methods`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ope_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Contraintes pour les tables déchargées
@@ -338,17 +409,24 @@ ALTER TABLE `beneficiaries`
   ADD CONSTRAINT `beneficiaries_ibfk_2` FOREIGN KEY (`account_id_2`) REFERENCES `accounts` (`account_id`);
 
 --
+-- Contraintes pour la table `ccard`
+--
+ALTER TABLE `ccard`
+  ADD CONSTRAINT `ccard_ibfk_1` FOREIGN KEY (`card_account_id`) REFERENCES `accounts` (`account_id`),
+  ADD CONSTRAINT `ccard_ibfk_2` FOREIGN KEY (`card_user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Contraintes pour la table `cheq`
+--
+ALTER TABLE `cheq`
+  ADD CONSTRAINT `cheq_ibfk_1` FOREIGN KEY (`cheq_account_id`) REFERENCES `accounts` (`account_id`);
+
+--
 -- Contraintes pour la table `operations`
 --
 ALTER TABLE `operations`
   ADD CONSTRAINT `operations_ibfk_1` FOREIGN KEY (`ope_acc_id_1`) REFERENCES `accounts` (`account_id`),
   ADD CONSTRAINT `operations_ibfk_2` FOREIGN KEY (`ope_acc_id_2`) REFERENCES `accounts` (`account_id`);
-
---
--- Contraintes pour la table `payment_methods`
---
-ALTER TABLE `payment_methods`
-  ADD CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`);
 
 --
 -- Contraintes pour la table `users`
