@@ -56,7 +56,7 @@ if(empty($_POST["agency_password"])) {
 
 
             // chercher l'adresse de l'agence
-            $adress = $bdd->prepare("SELECT * FROM adresses a INNER JOIN agencies ag on a.add_id = ag.add_id WHERE ag.agency_id = 1");
+            $adress = $bdd->prepare("SELECT * FROM adresses a INNER JOIN agencies ag on a.add_id = ag.add_id WHERE ag.agency_id = ?");
             $adress->execute(array($_POST['agency_id']));
             $add = $adress->fetch();
 

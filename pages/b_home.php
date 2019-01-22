@@ -1,5 +1,6 @@
 <?php
 session_start();
+if (isset($_SESSION['agency_id'])) {
 ?>
 
 <html lang="en">
@@ -16,4 +17,7 @@ session_start();
 include '../modules/b_nav_bar.php';
 include '../modules/caroussel.php';
 include '../modules/end.php'; 
-?>
+
+} else {
+    header('location:../pages/b_login.php');
+}
